@@ -68,4 +68,3 @@ void printPlayerInfo(const char* name, const int level, const int force, const i
     cout << "Coins: " << coins << endl;
     cout << LINE_DIVIDER << endl;
 }
-

@@ -87,9 +87,9 @@ int main(int argc, char *argv[])
 {
     const int NUMBER_OF_TESTS = 3;
     std::function<bool()> tests[NUMBER_OF_TESTS] = {
-        testPlayer,
-        testCard,
-        testMtmchkin
+            testPlayer,
+            testCard,
+            testMtmchkin
     };
 
     if (argc < 2) {

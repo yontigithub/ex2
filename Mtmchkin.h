@@ -5,7 +5,6 @@
 #ifndef EX2_GAME_H
 #define EX2_GAME_H
 #include "Card.h"
-#include <iostream>
 
 /*
  * GameStatus:
@@ -57,11 +56,11 @@ public:
      */
     GameStatus getGameStatus() const;
 
-    //TODO: complete the Mtmchkin class.
-
 private:
-    //TODO: complete the Mtmchkin class.
-
+    Player m_player;
+    GameStatus m_gameStatus;
+    Card* m_deck, m_first;
+    int m_cardNum, m_card;
 };
 
 
