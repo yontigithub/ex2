@@ -5,6 +5,7 @@
 #ifndef EX2_PLAYER_H
 #define EX2_PLAYER_H
 
+#include <iostream>
 
 class Player {
 public:
@@ -19,9 +20,9 @@ public:
     bool pay(int x);
     int getAttackStrength() const;
 
-    Player(const std::string name, int maxHP, int force);
-    Player(const std::string name, int maxHP);
-    Player(const std::string name);
+    Player(const std::string &name, int maxHP, int force);
+    Player(const std::string &name, int maxHP);
+    Player(const std::string &name);
     ~Player();
     Player(const Player& player);
 

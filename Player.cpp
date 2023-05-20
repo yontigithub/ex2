@@ -28,7 +28,7 @@ static int max(const int a, const int b) {
     return (a > b ? a : b);
 }
 
-Player::Player(const std::string name, const int maxHP, const int force) {
+Player::Player(const std::string &name, const int maxHP, const int force) {
 
     // Inserts all the necessary parameter values given into the implicitly passed object
     this->m_name = std::string(name);
@@ -39,19 +39,20 @@ Player::Player(const std::string name, const int maxHP, const int force) {
     this->m_coins = 0;
 }
 
-Player::Player(const std::string name, const int maxHP) :
+Player::Player(const std::string &name, const int maxHP) :
         Player(name, maxHP, 5) // Aided by the previously implemented: Player constructor
 {
 
 }
 
-Player::Player(const std::string name) :
+Player::Player(const std::string &name) :
         Player(name, 100) // Yet again uses the existing constructor with passed argument
 {
 
 }
 
 Player::~Player() {
+
 }
 
 Player::Player(const Player& p) :

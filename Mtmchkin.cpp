@@ -14,21 +14,24 @@
 #include "Player.h"
 #include "Card.h"
 
-
 // ************************* Implementation ****************************
 
 Mtmchkin::Mtmchkin(const char *playerName, const Card *cardsArray, int numOfCards) :
-        m_player(Player(playerName)), // Set m_player with appropriate Player constructor
+        m_player(Player(std::string(playerName))), // Sets m_player with the Player c'tor
         m_gameStatus(GameStatus::MidGame), // Set m_gameStatus to the game status MidGame
-        m_deck((Card*)malloc(sizeof(Card) * numOfCards)), // Memory allocation for m_deck
-        m_cardNum(numOfCards), // Set m_cardNum to the num of cards given with numOfCards
-        m_card(0) // Set m_card to the 1st card position to draw from the deck which is 0
+        m_deck(new Card[numOfCards]), // Memory allocation for numOfCards cards in m_deck
+        m_first(m_deck), // Set m_card to the first card that will be drawn from the deck
+        m_cardNum(numOfCards) // Set m_cardNum to the number of cards given in numOfCards
 {
 
     for (int i = 0; i < numOfCards; i++) {
         m_deck[i] = cardsArray[i]; // Copy cardsArray's content to m_deck with copy c'tor
     }
 
+}
+
+Mtmchkin::~Mtmchkin() {
+    delete[] m_first;
 }
 
 void Mtmchkin::playNextCard() {
@@ -39,12 +42,10 @@ void Mtmchkin::playNextCard() {
 
     // Iterate to the next card, both the top card (m_deck++) and the position (m_card++)
     m_deck++;
-    m_card++;
 
     // If we reach the end of the deck, nullify m_card and rewind m_deck to its beginning
-    if (m_card == m_cardNum) {
-        m_card = 0;
-        m_deck -= m_cardNum;
+    if (m_deck - m_first >= m_cardNum) {
+        m_deck = m_first;
     }
 }
 

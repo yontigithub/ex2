@@ -28,7 +28,7 @@ public:
     */
     Mtmchkin(const char* playerName, const Card* cardsArray, int numOfCards);
 
-
+    ~Mtmchkin();
     /*
      * Play the next Card - according to the instruction in the exercise document
      *
@@ -59,8 +59,8 @@ public:
 private:
     Player m_player;
     GameStatus m_gameStatus;
-    Card* m_deck, m_first;
-    int m_cardNum, m_card;
+    Card* m_deck, *m_first;
+    int m_cardNum;
 };
 
 
