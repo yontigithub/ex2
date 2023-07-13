@@ -20,22 +20,29 @@
 
 // ************************* Implementation ****************************
 
-static int min(const int a, const int b) {
-    return (a < b ? a : b);
-}
-
-static int max(const int a, const int b) {
-    return (a > b ? a : b);
-}
-
 Player::Player(const std::string &name, const int maxHP, const int force) {
 
     // Inserts all the necessary parameter values given into the implicitly passed object
-    this->m_name = std::string(name);
+
+    this->m_name = std::string(name); // default for name if spaces in it?
     this->m_level = 1;
-    this->m_force = force;
-    this->m_maxHp = maxHP;
-    this->m_HP = maxHP;
+
+    if (force < 0) {
+        this->m_force = 5;
+    }
+    else {
+        this->m_force = force;
+    }
+
+    if (maxHP <= 0) {
+        this->m_maxHp = 100;
+        this->m_HP = 100;
+    }
+    else {
+        this->m_maxHp = maxHP;
+        this->m_HP = maxHP;
+    }
+
     this->m_coins = 0;
 }
 
@@ -83,21 +90,23 @@ int Player::getLevel() const {
 }
 
 void Player::buff(const int x) {
-    m_force += x;
+    if (x > 0) {
+        m_force += x;
+    }
 }
 
 void Player::heal(const int x) {
     if (x < 0) {
         return; // Can't be healed in negative amounts, so there's no need to continue on
     }
-    m_HP = min(m_maxHp, m_HP + x); // The min() function keeps the HP to maxHP at maximum
+    m_HP = std::min(m_maxHp, m_HP + x); // The min() function keeps the HP to maxHP at maximum
 }
 
 void Player::damage(int x) {
     if (x < 0) {
         return; // Can't do damage in negative amounts, so there's no need to continue on
     }
-    m_HP = max(0, m_HP - x); // The max() function is used to keep the HP to 0 at minimum
+    m_HP = std::max(0, m_HP - x); // The max() function is used to keep the HP to 0 at minimum
 }
 
 bool Player::isKnockedOut() const {
@@ -105,7 +114,9 @@ bool Player::isKnockedOut() const {
 }
 
 void Player::addCoins(int x) {
-    m_coins += x;
+    if (x > 0) {
+        m_coins += x;
+    }
 }
 
 bool Player::pay(int x) {
